@@ -76,10 +76,8 @@ function uniquify (uname) {
   var unique = false
   var random
   while (!unique) {
-    uname += alphanum(random(36)) + 
-  } Appellation:
-Bottle Name:
-Bottle Password:
+    uname += alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36))
+  }
 
 }
 
@@ -89,5 +87,5 @@ function alphanum (num) {
 }
 
 function random(num) {
-  Math.round(Math.random() * num))
+  Math.round(Math.random() * num)
 }

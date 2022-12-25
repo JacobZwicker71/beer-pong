@@ -13,23 +13,23 @@
   <button id="thing">Open or Share a Bottle</button>
   <script>
     thing.onclick = () => {
-      // var scanUsername = new XMLHttpRequest();
-      // scanUsername.open('GET', `/scanUsernames?${username.value}`, false);
-      // scanUsername.onreadystatechange = function () {
-      //   if (this.readyState===4 & this.status===200) {
-      //     if (this.responseText==='unoriginal') {
-      //       alert('Please pick a more creative appellation, this one\'s already in use.')
-      //     }
-      //   }
-      // }
+      var scanUsername = new XMLHttpRequest();
+      scanUsername.open('GET', `/scanUsernames?${username.value}`, false);
+      scanUsername.onreadystatechange = function () {
+        if (this.readyState===4 & this.status===200) {
+          if (this.responseText==='unoriginal') {
+            alert('Please pick a more creative appellation, this one\'s already in use.')
+          }
+        }
+      }
       var name = document.getElementById('name').value;
       var xhttp = new XMLHttpRequest();
       xhttp.open('GET', `/login?${name}+${password.value}`, true);
+      console.log('1')
       xhttp.onreadystatechange = function() {
         if (this.readyState===4 & this.status===200) {
           document.body.innerHTML = 
-            `<textarea>${/*(*/this.responseText !== ''//) ? this.responseText : 'Your bottle is empty-- maybe you shouldn't have spent so much time at the bar.'}</textarea>`;//inserts "bottle" or filler text into a textbox
-          title.innerHTML = 'Beer Pong | Home';
+            `<textarea>${this.responseText || `Your bottle looks empty-- maybe you shouldn't have spent so much time at the bar`}</textarea>`
         }
       }
       xhttp.send()

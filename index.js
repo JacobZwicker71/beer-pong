@@ -1,4 +1,4 @@
-var express = require('express');//hola
+var express = require('express');//im an idiot, a while loop isn't terminating in the uniquify function
 var app = express();
 var fs = require('fs');
 var server = require('http');
@@ -16,6 +16,17 @@ app.get('/', (req, res) => {
 	})
 })
 
+app.get('/style.css', (req, res) => {
+	fs.readFile('style.css', (err, data) => {
+		if (err) {
+			console.log(err + '')
+		}
+		else {
+			res.send(data)
+		}
+	})
+})
+
 app.get('/scanUsernames', (req, res) => {
   console.log('A')
   fs.readFile('userData/usernames.md', (err, data) => {
@@ -24,21 +35,12 @@ app.get('/scanUsernames', (req, res) => {
       console.log('uname1 error')
     }
     else {
-      console.log('Ca')
       let username = req.url.split('?')[1]
-      console.log('Cb')
       let isUnique = !(data + '').includes(username)
-      console.log('Cc')
-      console.log(isUnique)
-      console.log('Cd')
-      fs.appendFile('userData/usernames.md', username, (err, data)=>{
-        console.log('Ce')
+      console.log('Unique? ' + isUnique)
+      fs.appendFile('userData/usernames.md', '\n' + isUnique ? username : uniquify(username), (err, data)=>{
         if (err) {
-          console.log('C: error')
-        }
-        else {
-          res.send(isUnique ? username : uniquify(username))
-          console.log('C: success')
+          console.log('Username c: error')
         }
       })
     }
@@ -74,10 +76,7 @@ app.listen(1080);
 
 function uniquify (uname) {
   var unique = false
-  var random
-  while (!unique) {
-    uname += alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36))
-  }
+  uname += '_' + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36));
 
 }
 
@@ -89,3 +88,5 @@ function alphanum (num) {
 function random(num) {
   Math.round(Math.random() * num)
 }
+
+console.log(uniquify('hi'))

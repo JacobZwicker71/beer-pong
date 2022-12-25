@@ -16,7 +16,10 @@ app.get('/', (req, res) => {
 	})
 })
 
-app.get('/')
+app.get('/scanUsernames', (req, res) => {
+  console.log('unoriginal')
+  res.send('unoriginal');
+})
 
 app.get('/login', (req, res) => {
   console.log('1')

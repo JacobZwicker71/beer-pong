@@ -14,14 +14,15 @@
   <script>
     thing.onclick = () => {
       var scanUsername = new XMLHttpRequest();
-      scanUsername.open('GET', `/scanUsernames?${username.value}`, false);
+      scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
       scanUsername.onreadystatechange = function () {
         if (this.readyState===4 & this.status===200) {
-          if (this.responseText==='unoriginal') {
+          if (this.responseText.includes('unoriginal')) {
             alert('Please pick a more creative appellation, this one\'s already in use.')
           }
         }
       }
+      scanUsername.send();
       var name = document.getElementById('name').value;
       var xhttp = new XMLHttpRequest();
       xhttp.open('GET', `/login?${name}+${password.value}`, true);
@@ -37,6 +38,3 @@
   </script>
 </body>
 </html>
-<!--time for the hard shit
-  can you do a call on discord? 
-  -->

@@ -1,0 +1,33 @@
+<DOCTYPE html>
+<html>
+<head>
+  <title id="title">Beer/Pong | Home</title>
+</head>
+<body>
+  Username: <input type="text" id="name" />
+  <br />
+  Password: <input type="password" id="password" />
+  <br />
+  <button id="thing">Login or Signup</button>
+  <script>
+    submit.onclick = () => {
+      xhttp = new XMLHttpRequest()
+      xhttp.open('GET', `/login?${username.value}+${password.value}`, true)
+      xhttp.onreadystatechange = function() {
+        let name = name.value 
+        if (this.readyState===4 & this.status===200) {
+          document.body.innerHTML = this.responseText
+          title.innerHTML = 'Beer Pong | Home'
+        }
+      }
+      xhttp.send()
+    }
+  </script>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+    var socket = io();
+    
+  </script>
+</body>
+</html>
+<!--im just reading the socket.io docs on another tab-->

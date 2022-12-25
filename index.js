@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('express');//hola
 var app = express();
 var fs = require('fs');
 var server = require('http');
@@ -76,11 +76,18 @@ function uniquify (uname) {
   var unique = false
   var random
   while (!unique) {
-    uname 
-  }
+    uname += alphanum(random(36)) + 
+  } Appellation:
+Bottle Name:
+Bottle Password:
+
 }
 
 function alphanum (num) {
   var anum = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'y', 'x', 'z']
   return anum[num - 1]
+}
+
+function random(num) {
+  Math.round(Math.random() * num))
 }

@@ -6,14 +6,8 @@ var { Server } = require('socket.io')
 var io = new Server(server)
 
 app.get('/', (req, res) => {
-	fs.readFile('index.html', (err, data) => {
-		if (err) {
-			console.log(err + '')
-		}
-		else {
-			res.send(data)
-		}
-	})
+  res.sendFile('index.html', {root: '.'})// 
+  
 })
 
 app.get('/style.css', (req, res) => {
@@ -38,7 +32,7 @@ app.get('/scanUsernames', (req, res) => {
       let username = req.url.split('?')[1]
       let isUnique = !(data + '').includes(username)
       console.log('Unique? ' + isUnique)
-      fs.appendFile('userData/usernames.md', '\n' + isUnique ? username : uniquify(username), (err, data)=>{
+      fs.appendFile('userData/usernames.md', (isUnique ? (username + '\n') : (uniquify(username) + '\n')), (err, data)=>{
         if (err) {
           console.log('Username c: error')
         }
@@ -77,7 +71,7 @@ app.listen(1080);
 function uniquify (uname) {
   var unique = false
   uname += '_' + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36)) + alphanum(random(36));
-
+	return uname;
 }
 
 function alphanum (num) {
@@ -86,7 +80,7 @@ function alphanum (num) {
 }
 
 function random(num) {
-  Math.round(Math.random() * num)
+  return Math.round(Math.random() * num)
 }
 
 console.log(uniquify('hi'))

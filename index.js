@@ -17,8 +17,32 @@ app.get('/', (req, res) => {
 })
 
 app.get('/scanUsernames', (req, res) => {
-  console.log('unoriginal')
-  res.send('unoriginal');
+  console.log('A')
+  fs.readFile('userData/usernames.md', (err, data) => {
+    console.log('B')
+    if (err) {
+      console.log('uname1 error')
+    }
+    else {
+      console.log('Ca')
+      let username = req.url.split('?')[1]
+      console.log('Cb')
+      let isUnique = !(data + '').includes(username)
+      console.log('Cc')
+      console.log(isUnique)
+      console.log('Cd')
+      fs.appendFile('userData/usernames.md', username, (err, data)=>{
+        console.log('Ce')
+        if (err) {
+          console.log('C: error')
+        }
+        else {
+          res.send(isUnique ? username : uniquify(username))
+          console.log('C: success')
+        }
+      })
+    }
+  })
 })
 
 app.get('/login', (req, res) => {
@@ -28,12 +52,12 @@ app.get('/login', (req, res) => {
 	fs.readFile("userData/" + name + '.txt', (err, data) => {
     console.log('2')
 		data = data + ''
-		if (err) {// maybe i fixed it
-      //console.log(err + '')\
+		if (err) {
       console.log('2a')
 			fs.writeFile("userData/" + name + '.txt', `password: ${password}`, (err, data) => {
-        
-				if (err) { console.log('New bottle err: ' + err) }//my bad
+				if (err) {
+          console.log('New bottle err: ' + err)
+        }
         res.send('')
 			})
 		}
@@ -41,11 +65,22 @@ app.get('/login', (req, res) => {
       console.log('2b')
       data = data.split('\n')
       data.shift()
-			res.send(data.join('\n'))//what happened? | ? | my bad, one should never return an Error object
-			console.log('blah')//only one problem now, i fixed the others
-      //you were right, i don't think err is returning what i thought it was
+			res.send(data.join('\n'))
 		}
 	})
 })
 
 app.listen(1080);
+
+function uniquify (uname) {
+  var unique = false
+  var random
+  while (!unique) {
+    uname 
+  }
+}
+
+function alphanum (num) {
+  var anum = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'y', 'x', 'z']
+  return(anum)
+}

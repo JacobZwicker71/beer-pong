@@ -12,14 +12,12 @@
   <br />
   <button id="thing">Open or Share a Bottle</button>
   <script>
-    thing.onclick = () => {
+    thing.onclick = ()=>{
       var scanUsername = new XMLHttpRequest();
       scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
       scanUsername.onreadystatechange = function () {
         if (this.readyState===4 & this.status===200) {
-          if (this.responseText.includes('unoriginal')) {
-            alert('Please pick a more creative appellation, this one\'s already in use.')
-          }
+          alert('Username: ' + this.responseText)
         }
       }
       scanUsername.send();
@@ -30,7 +28,7 @@
       xhttp.onreadystatechange = function() {
         if (this.readyState===4 & this.status===200) {
           document.body.innerHTML = 
-            `<textarea>${this.responseText || `Your bottle looks empty-- maybe you shouldn't have spent so much time at the bar`}</textarea>`
+            `<textarea>${this.responseText || `You're out of beer!`}</textarea>`
         }
       }
       xhttp.send()

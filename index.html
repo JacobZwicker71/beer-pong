@@ -4,18 +4,19 @@
   <title id="title">Beer/Pong | Home</title>
 </head>
 <body>
-  Name: <input type="text" id="name" />
+  Bottle Name: <input type="text" id="name" />
   <br />
   Password: <input type="password" id="password" />
   <br />
   <button id="thing">Open or Share a Bottle</button>
   <script>
-    submit.onclick = () => {
+    thing.onclick = () => {
       xhttp = new XMLHttpRequest()
       xhttp.open('GET', `/login?${username.value}+${password.value}`, true)
       xhttp.onreadystatechange = function() {
         let name = name.value 
         if (this.readyState===4 & this.status===200) {
+          alert('it worked?')
           document.body.innerHTML = 
             `<textarea>${this.responseText}</textarea>`
           title.innerHTML = 'Beer Pong | Home'

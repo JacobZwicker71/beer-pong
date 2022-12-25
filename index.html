@@ -1,52 +1,54 @@
 <DOCTYPE html>
-<!--   here's an invite: Join Zoom Meeting
-https://us05web.zoom.us/j/89955323661?pwd=b0ZZRHRYRTZvYlAxa3NOL012MjZJUT09
-
-Meeting ID: 899 5532 3661
-Passcode: hF1FNj
-
-
-idk if I can call rn
- 
-  ok, i changed a thing; do you think it works?-->
 <html>
 <head>
   <title id="title">Beer/Pong | Home</title>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="container">
-	<div class="in"> Appellation: </div>
-  <input type="text" id="username"/>
-  <br />
-	<div class="in"> Bottle Name: </div>
-	<input type="text" id="name"/>
-  <br />
-	<div class="in"> Bottle Password: </div>
-	<input type="password" id="password"/>
-  <br />
-  <button id="thing">Open or Share a Bottle</button>
-  <script>
-    thing.onclick = ()=>{
-      var scanUsername = new XMLHttpRequest();
-      scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
-      scanUsername.onreadystatechange = function () {
-        if (this.readyState===4 & this.status===200) {
-          alert('Username: ' + this.responseText)
-        }
-      }
-      scanUsername.send();
-      var name = document.getElementById('name').value;
-      var xhttp = new XMLHttpRequest();
-      xhttp.open('GET', `/login?${name}+${password.value}`, true);
-      console.log('1')
-      xhttp.onreadystatechange = function() {
-        if (this.readyState===4 & this.status===200) {
-          document.body.innerHTML = 
-            `<textarea>${this.responseText || `You're out of beer!`}</textarea>`
-        }
-      }
-      xhttp.send()
-    }
-  </script>
+<body id="body">
+  <div id="wrapper">
+	<div id="inputContainer">
+		<div class="in"> Appellation: </div>
+	  <input type="text" id="username" class="box"/>
+	  <br />
+		<div class="in"> Bottle Name: </div>
+		<input type="text" id="name" class="box"/>
+	  <br />
+		<div class="in"> Bottle Password: </div>
+		<input type="password" id="password" class="box"/>
+	  <br />
+    	</div>
+	  <div class="buttonContainer">
+		  <button id="thing">Open or Share a Bottle</button>
+	  </div>
+	  <script>
+	    thing.onclick = ()=>{alert('1');
+	      var scanUsername = new XMLHttpRequest();
+	      scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
+	      scanUsername.onreadystatechange = function () {
+	        if (this.readyState===4 & this.status===200) {
+	          alert('Username: ' + this.responseText)
+	        }
+	      }
+	      scanUsername.send();
+	      var name = document.getElementById('name').value;
+	      var xhttp = new XMLHttpRequest();
+	      xhttp.open('GET', `/login?${name}+${password.value}`, true);
+	      console.log('1')
+	      xhttp.onreadystatechange = function() {
+	        if (this.readyState===4 & this.status===200) {
+	          document.body.innerHTML = 
+	            `<div>\n${this.responseText || `You're out of beer!`}\n</div>`
+	        }
+	      }
+	      xhttp.send()
+	    }
+	    function parseChatData(data) {
+	      data = data.split('\n');
+	      for (let i = 0; i++; i < data.length) {
+	        data[i] = '<p>' + data[i] + '</p>\n'
+	      }
+	    }
+	  </script>
+</div>
 </body>
 </html>

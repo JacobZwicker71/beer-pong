@@ -1,9 +1,17 @@
-#container {
-	margin-left: 200px;
+#body {
+}
+
+#inputContainer {
+	margin-left: 180px;
+	float: left;
+}
+
+#buttonContainer {
+	float: left;
 }
 
 .in {
-	margin-left: -190px;
+	margin-left: -170px;
 	float: left;
 }
 

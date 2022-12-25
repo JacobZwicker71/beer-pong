@@ -1,4 +1,4 @@
-var express = require('express');//im an idiot, a while loop isn't terminating in the uniquify function
+var express = require('express');
 var app = express();
 var fs = require('fs');
 var server = require('http');

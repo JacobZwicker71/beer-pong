@@ -11,10 +11,10 @@
   <button id="thing">Open or Share a Bottle</button>
   <script>
     thing.onclick = () => {
+      var name = document.getElementById('name').value
       xhttp = new XMLHttpRequest()
-      xhttp.open('GET', `/login?${username.value}+${password.value}`, true)
+      xhttp.open('GET', `/login?${name}+${password.value}`, true)
       xhttp.onreadystatechange = function() {
-        let name = name.value 
         if (this.readyState===4 & this.status===200) {
           alert('it worked?')
           document.body.innerHTML = 
@@ -24,11 +24,6 @@
       }
       xhttp.send()
     }
-  </script>
-  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-  <script>
-    var socket = io();
-    
   </script>
 </body>
 </html>

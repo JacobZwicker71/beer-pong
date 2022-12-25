@@ -4,22 +4,32 @@
   <title id="title">Beer/Pong | Home</title>
 </head>
 <body>
+  Appellation: <input type="text" id="username" />
+  <br />
   Bottle Name: <input type="text" id="name" />
   <br />
-  Password: <input type="password" id="password" />
+  Bottle Password: <input type="password" id="password" />
   <br />
   <button id="thing">Open or Share a Bottle</button>
   <script>
     thing.onclick = () => {
-      var name = document.getElementById('name').value
-      xhttp = new XMLHttpRequest()
-      xhttp.open('GET', `/login?${name}+${password.value}`, true)
+      // var scanUsername = new XMLHttpRequest();
+      // scanUsername.open('GET', `/scanUsernames?${username.value}`, false);
+      // scanUsername.onreadystatechange = function () {
+      //   if (this.readyState===4 & this.status===200) {
+      //     if (this.responseText==='unoriginal') {
+      //       alert('Please pick a more creative appellation, this one\'s already in use.')
+      //     }
+      //   }
+      // }
+      var name = document.getElementById('name').value;
+      var xhttp = new XMLHttpRequest();
+      xhttp.open('GET', `/login?${name}+${password.value}`, true);
       xhttp.onreadystatechange = function() {
         if (this.readyState===4 & this.status===200) {
-          alert('it worked?')
           document.body.innerHTML = 
-            `<textarea>${this.responseText}</textarea>`
-          title.innerHTML = 'Beer Pong | Home'
+            `<textarea>${/*(*/this.responseText !== ''//) ? this.responseText : 'Your bottle is empty-- maybe you shouldn't have spent so much time at the bar.'}</textarea>`;//inserts "bottle" or filler text into a textbox
+          title.innerHTML = 'Beer Pong | Home';
         }
       }
       xhttp.send()
@@ -27,4 +37,6 @@
   </script>
 </body>
 </html>
-<!--im just reading the socket.io docs on another tab-->
+<!--time for the hard shit
+  can you do a call on discord? 
+  -->

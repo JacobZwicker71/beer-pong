@@ -1,9 +1,3 @@
-//vars I WILL ADD GOOD DOCUMENTATION IF IT KILLS ME, cool
-//don't judge, i just startedish
-//dw I got no idea what you are doing
-//sick
-//want me to explain shit?
-
 var express = require('express');
 var app = express();
 var fs = require('fs');
@@ -22,19 +16,28 @@ app.get('/', (req, res) => {
 	})
 })
 
+app.get('/scanUsernames', (req, res) => {
+  res.send('unique')
+})
+
 app.get('/login', (req, res) => {
 	var name = req.url.split('?')[1].split('+')[0]
 	var password = req.url.split('+')[1]
 	fs.readFile("userData/" + name + '.txt', (err, data) => {
 		data = data + ''
-		if (err) {
-			console.log('')
+		if (err) {// maybe i fixed it
+      //console.log(err + '')
 			fs.writeFile("userData/" + name + '.txt', `password: ${password}`, (err, data) => {
-				if (err) { console.log('New account err: ' + err) }
+				if (err) { console.log('New bott err: ' + err) }//my bad
+        res.send('')
 			})
 		}
-		else if (password == data.split('\n')[0]) {//this line is fucked
-			res.send(data.substr(data.split('\n')[0].length, data.length))//this one is too
+		else if (password == data.split('password: ')[1].split('\n')[0]) {
+      data = data.split('\n')
+      data.shift()
+			res.send(data.join('\n'))//what happened? | ? | my bad, one should never return an Error object
+			console.log('blah')//only one problem now, i fixed the others
+      //you were right, i don't think err is returning what i thought it was
 		}
 	})
 })

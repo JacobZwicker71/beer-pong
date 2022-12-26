@@ -37,16 +37,24 @@
 	      xhttp.onreadystatechange = function() {
 	        if (this.readyState===4 & this.status===200) {
 	          document.body.innerHTML = 
-	            `<div>\n${this.responseText || `You're out of beer!`}\n</div>`
+	            `<div>
+             ${parseChatData(this.responseText || `You're out of beer!`)}
+             </div>
+             <textarea id="sendText">
+              Bar Convos
+             </textarea>
+             
+             `
 	        }
 	      }
 	      xhttp.send()
 	    }
 	    function parseChatData(data) {
-	      data = data.split('\n');
-	      for (let i = 0; i++; i < data.length) {
-	        data[i] = '<p>' + data[i] + '</p>\n'
+        data = data.split('\n');
+	      for (let i = 0; i < data.length; i++) {
+	        data[i] = '<p>' + data[i] + '</p>'
 	      }
+        return data.join('\n')
 	    }
 	  </script>
 </div>

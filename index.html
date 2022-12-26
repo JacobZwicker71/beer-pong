@@ -7,36 +7,36 @@
 <body id="body">
   <div id="wrapper">
 	<div id="inputContainer">
-		<div class="in"> Appellation: </div>
+	<div class="in"> Appellation: </div>
 	  <input type="text" id="username" class="box"/>
-	  <br />
-		<div class="in"> Bottle Name: </div>
+  <br />
+	<div class="in"> Bottle Name: </div>
 		<input type="text" id="name" class="box"/>
-	  <br />
-		<div class="in"> Bottle Password: </div>
+  <br />
+	<div class="in"> Bottle Password: </div>
 		<input type="password" id="password" class="box"/>
-	  <br />
+  <br />
     	</div>
 	  <div class="buttonContainer">
-		  <button id="thing">Open or Share a Bottle</button>
+  <button id="thing">Open or Share a Bottle</button>
 	  </div>
-	  <script>
+  <script>
 	    thing.onclick = ()=>{alert('1');
-	      var scanUsername = new XMLHttpRequest();
-	      scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
-	      scanUsername.onreadystatechange = function () {
-	        if (this.readyState===4 & this.status===200) {
-	          alert('Username: ' + this.responseText)
-	        }
-	      }
-	      scanUsername.send();
-	      var name = document.getElementById('name').value;
-	      var xhttp = new XMLHttpRequest();
-	      xhttp.open('GET', `/login?${name}+${password.value}`, true);
-	      console.log('1')
-	      xhttp.onreadystatechange = function() {
-	        if (this.readyState===4 & this.status===200) {
-	          document.body.innerHTML = 
+      var scanUsername = new XMLHttpRequest();
+      scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
+      scanUsername.onreadystatechange = function () {
+        if (this.readyState===4 & this.status===200) {
+          alert('Username: ' + this.responseText)
+        }
+      }
+      scanUsername.send();
+      var name = document.getElementById('name').value;
+      var xhttp = new XMLHttpRequest();
+      xhttp.open('GET', `/login?${name}+${password.value}`, true);
+      console.log('1')
+      xhttp.onreadystatechange = function() {
+        if (this.readyState===4 & this.status===200) {
+          document.body.innerHTML = 
 	            `<div>
              ${parseChatData(this.responseText || `You're out of beer!`)}
              </div>
@@ -45,10 +45,10 @@
              </textarea>
              
              `
-	        }
-	      }
-	      xhttp.send()
-	    }
+        }
+      }
+      xhttp.send()
+    }
 	    function parseChatData(data) {
         data = data.split('\n');
 	      for (let i = 0; i < data.length; i++) {
@@ -56,7 +56,7 @@
 	      }
         return data.join('\n')
 	    }
-	  </script>
+  </script>
 	</div>
 </body>
 </html>

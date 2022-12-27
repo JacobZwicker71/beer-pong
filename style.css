@@ -6,7 +6,7 @@
   position: absolute;
 	left: 10px;
 	float: left;
-  width: 206px;
+  width: auto;
   padding-left: 170px;
   padding-bottom: 2px;
   padding-top: 1px;
@@ -21,7 +21,8 @@
 
 .in {
 	margin-left: -168px;
-  margin-top: 0.2em;
+  /* margin-top: 0.2em; */
+	margin-bottom: auto;
 	float: left;
 }
 
@@ -49,4 +50,5 @@
 
 #thing:hover {
 	filter: invert(90%);
+	border: ridge #4C9AA6;
 }

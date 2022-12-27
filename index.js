@@ -82,5 +82,3 @@ function alphanum (num) {
 function random(num) {
   return Math.round(Math.random() * num)
 }
-
-console.log(uniquify('hi'))

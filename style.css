@@ -1,9 +1,18 @@
 #body {
+	background-color: #59a7b3;
 }
 
 #inputContainer {
-	margin-left: 180px;
+  position: absolute;
+	left: 10px;
 	float: left;
+  width: 206px;
+  padding-left: 170px;
+  padding-bottom: 2px;
+  padding-top: 1px;
+  background-color: #b36559;
+  border-style: solid;
+  border-color: #b36559;
 }
 
 #buttonContainer {
@@ -11,10 +20,33 @@
 }
 
 .in {
-	margin-left: -170px;
+	margin-left: -168px;
+  margin-top: 0.2em;
 	float: left;
 }
 
+.box {
+	border: ridge ##b36559;
+  background-color: #e9e9ed;
+}
+
+.box:hover {
+	border: ridge #59a7b3;
+	filter: invert(90%);
+  background-color: #d0d0d7;
+}
+
+.box:focus {
+  outline: none;
+}
+
+#thing {
+  width: 382px;
+  margin-top: calc(6em + 3px);
+  margin-left: 2px;
+  border: ridge #b36559;
+}
+
 #thing:hover {
-	filter: invert(100%);
+	filter: invert(90%);
 }

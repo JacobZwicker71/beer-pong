@@ -21,23 +21,24 @@
 		  <button id="thing">Open or Share a Bottle (Chatroom)</button>
 	  </div>
     </div>
-  <script type="module">
-    import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
-    
-    const socket = io();
-  </script>
+  
   <!--socket.io library setup-->
+  
 	  <script>
+      const socket = io();
 	    thing.onclick = ()=>{alert('1');
 	      var scanUsername = new XMLHttpRequest();
 	      scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
 	      scanUsername.onreadystatechange = function () {
 	        if (this.readyState===4 & this.status===200) {
-	          alert('Username: ' + this.responseText)
+	          if (this.responseText) {
+              username = this.responseText
+            }
+            else {alert('Appelation error!')}
 	        }
 	      }
 	      scanUsername.send();
-	      var name = document.getElementById('name').value;
+	      name = document.getElementById('name').value;
 	      var xhttp = new XMLHttpRequest();
 	      xhttp.open('GET', `/login?${name}+${password.value}`, true);
 	      console.log('1')
@@ -67,8 +68,11 @@
         return data.join('\n')
 	    }
       function submit(str) {
-        alert(str);
+        socket.emit('chat', {'name': name, 'uname': username, 'str': str});
       }
 	  </script>
+    <script type="module">
+    import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+  </script>
 </body>
 </html>

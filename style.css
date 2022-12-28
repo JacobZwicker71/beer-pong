@@ -5,7 +5,6 @@
 #inputContainer {
   position: absolute;
 	left: 10px;
-	float: left;
   width: auto;
   padding-left: 170px;
   padding-bottom: 2px;
@@ -16,7 +15,7 @@
 }
 
 #buttonContainer {
-	float: left;
+  position: absolute;
 }
 
 .in {
@@ -27,7 +26,7 @@
 }
 
 .box {
-	border: ridge ##b36559;
+	border: ridge #b36559;
   background-color: #e9e9ed;
 }
 

@@ -51,3 +51,29 @@
 	filter: invert(90%);
 	border: ridge #4C9AA6;
 }
+
+#sendText {
+  position: fixed;
+  bottom: 15px;
+  left: 0;
+  width: 100vw;
+  height: max(15%, 30px);
+  background-color: #b36559;
+}
+
+#submitText {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 15px;
+  background-color: #e9e9ed;
+}
+
+#wrapper1 {
+  display: none;
+}
+
+#wrapper2 {
+  display: default;
+}

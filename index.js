@@ -1,24 +1,6 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');//i might have fixed it
-const { createServer } = require("http");
-const { Server } = require("socket.io");
-
-const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
-
-io.on('connection', socket => {
-	console.log('New socket')
-})
-
-io.on('chat', data => {
-	console.log('Message sent in ' + data.name + ' bottle.')
-	fs.appendFile('userData/' + data.name + '.txt', '\n' + data.uname + ': ' + data.str, () => { })
-})
-
-httpServer.listen(3000);
-
 
 //hi yo
 //FUCK ME why
@@ -30,7 +12,7 @@ httpServer.listen(3000);
 //i tried implementing socket.io. it's long polling and every fucking time it gets a 404 error
 //are you trying to access a file?
 //no
-//hmmmmm so what did you add that wasn't there before the error?
+//hmmmmm so what did you add that wasn't there before uthe error?
 
 //is io build into node? or is it an import
 //I am not familiar with imports in js so can you tell me if you need an explicit import sstatement?
@@ -87,6 +69,17 @@ app.get('/style.css', (req, res) => {
 	})
 })
 
+app.get('/script.js', (req, res) => {
+	fs.readFile('script.js', (err, data) => {
+		if (err) {
+			console.log(err + '')
+		}
+		else {
+			res.send(data)
+		}
+	})
+})
+
 app.get('/scanUsernames', (req, res) => {
 	console.log('A')
 	fs.readFile('userData/usernames.md', (err, data) => {
@@ -126,13 +119,58 @@ app.get('/login', (req, res) => {
 				res.send('')
 			})
 		}
-		else if (password == data.split('password: ')[1].split('\n')[0]) {
+		else if (password === data.split('password: ')[1].split('\n')[0]) {
 			console.log('2b')
 			data = data.split('\n')
 			data.shift()
 			res.send(data.join('\n'))
 		}
+    // else {
+    //   res.send('Wrong Password!')
+    // } TODO: make this work for the frontend
 	})
+})
+
+app.get('/send', (req, res) => {
+  console.log('!')
+  if (req.url.split('?')[1] === '') {
+    console.log('@2')
+    fs.readFile('userData/' + room + '.txt', (err, data) => {
+        if(err) {
+          console.log('Error reading ' + room + ' bottle.')
+        }
+        else {
+          data = data.toString().split('\n');
+          data.shift();
+          res.send(data.join('\n'))
+        }
+      })
+  }
+  else {
+    var room = req.url.split('?')[1].split('+')[0]
+    var username = req.url.split('?')[1].split('+')[1]
+    var str = req.url.split('?')[1].split('+')[2]
+    console.log('@')
+    fs.appendFile('userData/' + room + '.txt', '\n' + username + ': ' + decodeURI(str), err => {
+      console.log('#')
+      if (err) {
+        console.log('appendage error')
+      }
+      else {
+        console.log(room)
+        fs.readFile('userData/' + room + '.txt', (err, data) => {
+          if(err) {
+            console.log('Error reading ' + room + ' bottle.')
+          }
+          else {
+            data = data.toString().split('\n');
+            data.shift();
+            res.send(data.join('\n'))
+          }
+        })
+      }
+    })
+  }
 })
 
 app.listen(1080);

@@ -5,74 +5,32 @@
 	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="body">
-  <div id="wrapper">
-	<div id="inputContainer">
-		<div class="in"> Appellation: </div>
-	  <input type="text" id="username" class="box"/>
-	  <br />
-		<div class="in"> Bottle Name: </div>
-		<input type="text" id="name" class="box"/>
-	  <br />
-		<div class="in"> Bottle Password: </div>
-		<input type="password" id="password" class="box"/>
-	  <br />
+  <div id="wrapper1">
+	  <div id="inputContainer">
+		  <div class="in"> Appellation: </div>
+	    <input type="text" id="username" class="box"/>
+	    <br />
+		  <div class="in"> Bottle Name: </div>
+		  <input type="text" id="name" class="box"/>
+	    <br />
+		  <div class="in"> Bottle Password: </div>
+		  <input type="password" id="password" class="box"/>
+	    <br />
     	</div>
 	  <div class="buttonContainer">
 		  <button id="thing">Open or Share a Bottle (Chatroom)</button>
 	  </div>
-    </div>
-  
-  <!--socket.io library setup-->
-  
-	  <script>
-      const socket = io();
-	    thing.onclick = ()=>{alert('1');
-	      var scanUsername = new XMLHttpRequest();
-	      scanUsername.open('GET', `/scanUsernames?${username.value}`, true);
-	      scanUsername.onreadystatechange = function () {
-	        if (this.readyState===4 & this.status===200) {
-	          if (this.responseText) {
-              username = this.responseText
-            }
-            else {alert('Appelation error!')}
-	        }
-	      }
-	      scanUsername.send();
-	      name = document.getElementById('name').value;
-	      var xhttp = new XMLHttpRequest();
-	      xhttp.open('GET', `/login?${name}+${password.value}`, true);
-	      console.log('1')
-	      xhttp.onreadystatechange = function() {
-	        if (this.readyState===4 & this.status===200) {
-	          document.body.innerHTML = 
-	            `<div>
-             ${parseChatData(this.responseText || `You're out of beer!`)}
-             </div>
-             <textarea id="sendText">
-              Bar Convos
-             </textarea>
-             <br />
-             <button id="submitText" onclick="submit(sendText.value)">
-              Submit
-             </button>
-             `
-	        }
-	      }
-	      xhttp.send()
-	    }
-	    function parseChatData(data) {
-        data = data.split('\n');
-	      for (let i = 0; i < data.length; i++) {
-	        data[i] = '<p>' + data[i] + '</p>'
-	      }
-        return data.join('\n')
-	    }
-      function submit(str) {
-        socket.emit('chat', {'name': name, 'uname': username, 'str': str});
-      }
-	  </script>
-    <script type="module">
-    import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
-  </script>
+  </div>
+  <div id="wrapper2">
+    <div id="chatText"></div>
+    <textarea id="sendText">
+      Bar Convos
+    </textarea>
+    <br />
+    <button id="submitText" onclick="submit(name, username, sendText.value)">
+      Submit
+    </button>
+  </div>
+<script href="script.js"></script>
 </body>
 </html>
